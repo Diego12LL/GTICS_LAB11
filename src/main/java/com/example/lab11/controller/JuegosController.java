@@ -118,5 +118,5 @@ public class JuegosController {
             return ResponseEntity.badRequest().body(rpta);
         }
     }
-    
+
 }
