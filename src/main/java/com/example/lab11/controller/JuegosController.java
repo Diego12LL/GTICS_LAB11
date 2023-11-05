@@ -27,7 +27,7 @@ public class JuegosController {
     }
 
 
-    @PostMapping(value = {"", "/"})
+    @PostMapping(value = {"", "/guardar"})
     public ResponseEntity<HashMap<String, Object>> crearJuego(
             @RequestBody Juegos juego,   //para crear se usa body en postman - raw
             @RequestParam(value = "fetchId", required = false) boolean fetchId) {  //pa que devuelva o no id: ...8080/product?fetchid=true
@@ -42,7 +42,7 @@ public class JuegosController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseJson);
     }
 
-    @PutMapping(value = {"", "/"})
+    @PutMapping(value = {"", "/actualizar"})
     public ResponseEntity<HashMap<String, Object>> actualizarJuego(@RequestBody Juegos juegoRecibido) {
 
         HashMap<String, Object> rpta = new HashMap<>();
@@ -94,7 +94,7 @@ public class JuegosController {
     }
 
 
-    @DeleteMapping("")                                                                           //con PathVariable /{id}
+    @DeleteMapping("/borrar")                                                                           //con PathVariable /{id}
     public ResponseEntity<HashMap<String, Object>> borrarJuego(@RequestParam("id") String idStr){  //Con rquestParam ?id=34
         HashMap<String, Object> rpta = new HashMap<>();
         try{

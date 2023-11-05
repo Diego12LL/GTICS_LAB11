@@ -54,7 +54,7 @@ public class DistribuidorasController {
         }
     }
     */
-    @PostMapping(value = {"", "/"})
+    @PostMapping(value = {"", "/guardar"})
     public ResponseEntity<HashMap<String, Object>> crearDistribuidora(
             @RequestBody Distribuidoras distribuidora,   //para crear se usa body en postman - raw
             @RequestParam(value = "fetchId", required = false) boolean fetchId) {  //pa que devuelva o no id: ...8080/product?fetchid=true
@@ -70,7 +70,7 @@ public class DistribuidorasController {
     }
 
 
-    @PutMapping(value = {"", "/"})
+    @PutMapping(value = {"", "/actualizar"})
     public ResponseEntity<HashMap<String, Object>> actualizarDistribuidora(@RequestBody Distribuidoras distribuidoraRecibida) {
 
         HashMap<String, Object> rpta = new HashMap<>();
@@ -114,7 +114,7 @@ public class DistribuidorasController {
     }
 
 
-    @DeleteMapping("")                                                                           //con PathVariable /{id}
+    @DeleteMapping("/borrar")                                                                           //con PathVariable /{id}
     public ResponseEntity<HashMap<String, Object>> borrarDistribuidora(@RequestParam("id") String idStr){  //Con rquestParam ?id=34
         HashMap<String, Object> rpta = new HashMap<>();
         try{
