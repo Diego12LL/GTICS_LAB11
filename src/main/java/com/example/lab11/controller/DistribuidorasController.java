@@ -30,6 +30,30 @@ public class DistribuidorasController {
         return distribuidorasRepository.findAll();
     }
 
+
+    /*
+    No sale todavía esto, el código de stuardo no funca
+    @GetMapping(value = "")
+    public List<Distribuidoras> listarDistribuidoras() {
+        // Configurar RestTemplate con autenticación básica
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(
+                new BasicAuthenticationInterceptor("oscar.diaz@gmail.com", "oscar.diaz")
+        );
+
+        // Realizar la solicitud HTTP a la URL protegida
+        ResponseEntity<Distribuidoras[]> response = restTemplate.getForEntity(
+                "http://localhost:8080/distribuidoras", Distribuidoras[].class
+        );
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return Arrays.asList(response.getBody());
+        } else {
+            // Manejar errores aquí si es necesario
+            return Collections.emptyList();
+        }
+    }
+    */
     @PostMapping(value = {"", "/"})
     public ResponseEntity<HashMap<String, Object>> crearDistribuidora(
             @RequestBody Distribuidoras distribuidora,   //para crear se usa body en postman - raw
