@@ -18,7 +18,6 @@ public class DistribuidorasController {
 
     final JuegosRepository juegosRepository;
     final DistribuidorasRepository distribuidorasRepository;
-
     public DistribuidorasController(JuegosRepository juegosRepository, DistribuidorasRepository distribuidorasRepository) {
         this.juegosRepository = juegosRepository;
         this.distribuidorasRepository = distribuidorasRepository;
@@ -51,7 +50,7 @@ public class DistribuidorasController {
         } else {
             // Manejar errores aquí si es necesario
             return Collections.emptyList();
-        }
+        } aun falta probar esto
     }
     */
     @PostMapping(value = {"", "/guardar"})
@@ -70,7 +69,7 @@ public class DistribuidorasController {
     }
 
 
-    @PutMapping(value = {"", "/actualizar"})
+    @PutMapping(value = {"","/actualizar"})
     public ResponseEntity<HashMap<String, Object>> actualizarDistribuidora(@RequestBody Distribuidoras distribuidoraRecibida) {
 
         HashMap<String, Object> rpta = new HashMap<>();
@@ -95,8 +94,6 @@ public class DistribuidorasController {
 
                 if (distribuidoraRecibida.getSede() != null)
                     distribuidoraActualizada.setSede(distribuidoraRecibida.getSede());
-
-
                 distribuidorasRepository.save(distribuidoraActualizada);
                 rpta.put("resultado", "ok");
                 rpta.put("msg", "La distribuidora ha sido actualizada");
@@ -130,13 +127,32 @@ public class DistribuidorasController {
                 rpta.put("result","error");
                 rpta.put("msg","el ID ingresado no existe");
             }
-
             return ResponseEntity.ok(rpta);
         }catch (NumberFormatException e){
             rpta.put("result","error");
             rpta.put("msg","Debe ingresar un ID válido");
             return ResponseEntity.badRequest().body(rpta);
         }
+    }
+
+    @GetMapping("/buscar/{id}")
+    public HashMap<String, Object> buscar(@PathVariable("id") int id) {
+        HashMap<String, Object> respuesta = new HashMap<>();
+        try {
+
+            Optional<Distribuidoras> byId = distribuidorasRepository.findById(id);
+            if (byId.isPresent()) {
+                respuesta.put("resultado", "ok");
+                respuesta.put("distribuidora", byId.get());
+                return respuesta;
+            } else {
+                respuesta.put("resultado de busqueda", "no existe");
+                return respuesta;
+            }
+        } catch (NumberFormatException ex) {
+            respuesta.put("error", "no es numero");
+        }
+        return respuesta;
     }
 
 }
